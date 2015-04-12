@@ -19,22 +19,19 @@ When the FFT has a bunch of bins (equally divided strips in a window that descri
 
 The FFT simply takes a chunk of time (samples) and considers that chunk to be a single period of a repeating waveform. Most sounds are constant. Over any short period of time, the sound usually look like a regularly repeating function. The following is a way to consider this mathematically—taking a window over some portion of some signal that we want to consider as a periodic function.
 
-
 *This answers question 1 and 2*
 
 ### 2. Mini-abstract and relevance of [Frequency Domain]:
 In digital signal processing, the DFT function is any quantity or signal that varies over time. These signals are sampled over a finite time interval in a window function. The FFT is a much faster calculation (than the DFT), since it is a log based algorithm. The FFT computes the DFT of size N in O(N log N) operations. When you look at a sample and it does not have interger multiples in the cycles, the DFT will think there are other frequencies in the window frame. 
 
-The more samples we process, the more accurate our FFT will be. Let us create a constant for the amount of fouriers per second and the width is simply the inverse function of that. In addition, we need to get the total amount of transforms in order to sum up all of the frequencies within the spectrum. 
+The more samples we process, the more accurate our FFT will be. We need to create a constant for the amount of fouriers per second (frames per second) and the width is simply the inverse function of that. In addition, we need to get the total number of transforms in order to sum up all of the frequencies within the spectrum. We need to look for the frequency content of the sound at all possible frequencies so we need to divide the frequency spectrum into a number of frequency bands or bins. The number of samples in each analysis frame gives the size of the bin. The number of bins is given by the formula: ```numBins = sampleSize / 2```. The frequency depends on the relationship between the length of the FFT and the sample rate of the audio signal.
 
 ```python
-fouriersPerSec = 24 # Frames per second
+fouriersPerSec = 24
 fourierWidth = 1.0 / fouriersPerSec
-fourierWidthIndex = fourierWidth * float(sampleRate)
+sampleSize = fourierWidth * float(sampleRate)
 
 totalTransforms = round(duration * fouriersPerSec)
-fourierSpacing = round(fourierWidth * float(sampleRate))
-sampleSize = fourierWidthIndex
 freq = sampleRate / sampleSize * np.arange(sampleSize)
 ```
 

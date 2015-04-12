@@ -17,6 +17,10 @@ In digital signal processing, the DFT function is any quantity or signal that va
 
 If the sample frame does not have a sine wave, then there other tones in it. If there are glitches in the sine waves, this creates an inaccurate summation of the function in the frame. In order to avoid these issues, we use/have window functions. Some have larger bandwidths because of the different amplitude frequencies. There are different window functions, which would be more appropriate for different categories of sounds.
 
+When the FFT has a bunch of bins (equally divided strips in a window that describes the spectrum sample and frequency of the window), every signal is in the center of all the bins. If the singal is not in the center of the bin, it will diverge from its true value. This is phenomenon is called the Scallop loss. If you scale the FFT by sine scaling the waves using the Flatop Window approach, it will minimize Scallop loss.
+
+
+
 
 *This answers question 1 and 2*
 
